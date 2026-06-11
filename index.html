@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHSTORE - Business Analysis Case Study</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        :root {
+            --bg: #FAF8F6;
+            --surface: #FFFFFF;
+            --primary: #7A1E1E;
+            --accent: #D72638;
+            --text: #1C1C1C;
+            --secondary: #6B7280;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .heading-1 {
+            font-size: 5.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+        
+        .heading-2 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+        }
+        
+        .heading-3 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        
+        .heading-4 {
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+        
+        .text-secondary {
+            color: var(--secondary);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+        
+        .soft-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .soft-shadow-lg {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hover-lift {
+            transition: all 200ms ease-out;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .nav-active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .avatar-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(250, 248, 246, 0.8);
+            backdrop-filter: blur(10px);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #E5E7EB, transparent);
+        }
+        
+        .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .card-premium {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 200ms ease-out;
+        }
+        
+        .card-premium:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            transition: all 150ms ease-out;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        
+        .accordion-item {
+            border-bottom: 1px solid #E5E7EB;
+            transition: all 150ms ease-out;
+        }
+        
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .accordion-header {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 150ms ease-out;
+            background: var(--surface);
+        }
+        
+        .accordion-header:hover {
+            background: #FAFAFA;
+        }
+        
+        .accordion-header.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .accordion-icon {
+            transition: transform 200ms ease-out;
+        }
+        
+        .accordion-header.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 300ms ease-out;
+            background: #FAFAFA;
+        }
+        
+        .accordion-content.active {
+            max-height: 1000px;
+        }
+        
+        .accordion-text {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .skill-tag {
+            display: inline-block;
+            background: var(--surface);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--primary);
+            margin: 0.35rem;
+            transition: all 150ms ease-out;
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 200ms ease-out;
+        }
+        
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: var(--surface);
+            padding: 2rem;
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 16px;
+            overflow-y: auto;
+            animation: slideIn 300ms ease-out;
+        }
+        
+        .modal-close {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+            transition: all 150ms ease-out;
+            background: none;
+            border: none;
+        }
+        
+        .modal-close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .story-card {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(215, 38, 56, 0.02) 100%);
+            pointer-events: none;
+        }
+        
+        .story-card-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .metric-box {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--surface);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 200ms ease-out;
+        }
+        
+        .metric-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .workflow-step {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .workflow-step::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .workflow-arrow {
+            text-align: center;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        
+        .button-primary {
+            background: var(--primary);
+            color: white;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 200ms ease-out;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        
+        .button-primary:hover {
+            background: #8B2A2A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(122, 30, 30, 0.3);
+        }
+        
+        .button-secondary {
+            background: transparent;
+            color: var(--primary);
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 200ms ease-out;
+            border: 2px solid var(--primary);
+            cursor: pointer;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+        
+        .button-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #FAF8F6 0%, #FFFFFF 100%);
+        }
+        
+        .flow-diagram {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+        
+        .footer-divider {
+            background: linear-gradient(to right, transparent, #E5E7EB, transparent);
+            height: 1px;
+            margin: 3rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .heading-1 {
+                font-size: 2.5rem;
+            }
+            
+            .heading-2 {
+                font-size: 2rem;
+            }
+            
+            .heading-3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="sticky-nav border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold" style="color: var(--primary);">TECHSTORE</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#project" class="nav-link text-sm font-medium transition-all">Project</a>
+                <a href="#stakeholders" class="nav-link text-sm font-medium transition-all">Stakeholders</a>
+                <a href="#workflows" class="nav-link text-sm font-medium transition-all">Workflows</a>
+                <a href="#artifacts" class="nav-link text-sm font-medium transition-all">Artifacts</a>
+                <a href="#about" class="nav-link text-sm font-medium transition-all">About</a>
+                <a href="#contact" class="nav-link text-sm font-medium transition-all">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-gradient min-h-screen flex items-center justify-center py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                    <div class="mb-6 flex gap-2 flex-wrap">
+                        <span class="skill-tag">Business Analysis</span>
+                        <span class="skill-tag">System Design</span>
+                    </div>
+                    <h1 class="heading-1 mb-6" style="color: var(--primary);">TECHSTORE</h1>
+                    <p class="text-2xl text-secondary mb-4 font-light">Retail Management System</p>
+                    <p class="heading-4" style="color: var(--accent); font-weight: 400; margin-bottom: 1.5rem;">Business Analysis Case Study</p>
+                    
+                    <p class="text-lg leading-relaxed text-secondary mb-8 max-w-lg">
+                        A multi-role electronic retail management system designed to support retail operations, inventory management, internal administration and business reporting.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 mb-12">
+                        <button class="button-primary" onclick="document.getElementById('project').scrollIntoView();">Explore Case Study</button>
+                       <a
+    href="assets/CV_BA_BuiThiKieuNgan.pdf"
+    target="_blank"
+    class="button-secondary inline-flex items-center"
+>
+    View CV
+</a>
+                    </div>
+                    
+                    <div>
+                        <p class="text-sm text-secondary mb-3">Case Study by</p>
+                        <p class="font-semibold">Business Analysis Team</p>
+                        <p class="text-sm text-secondary">Systems Analysis & Business Modeling</p>
+                        <p class="text-sm text-secondary">Case Study Documentation</p>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="800" data-aos-offset="50" class="flex justify-center">
+    <div class="glass-effect p-4 rounded-2xl soft-shadow-lg">
+        <img
+            src="assets/images/techstore-cover.png"
+            alt="TechStore Dashboard"
+            style="width: 650px; max-width:100%;"
+            class="rounded-2xl"
+        >
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section id="project" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div data-aos="fade-up" data-aos-duration="800">
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="accent-line"></div>
+                    <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Project Overview</p>
+                </div>
+                <h2 class="heading-2 mb-12" style="color: var(--primary);">TechStore Retail Management System</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-6 mb-16" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="metric-box">
+                    <p class="metric-number">5</p>
+                    <p class="text-secondary text-sm">Team Members</p>
+                </div>
+                <div class="metric-box">
+                    <p class="metric-number">20</p>
+                    <p class="text-secondary text-sm">Sequence Diagrams</p>
+                </div>
+                <div class="metric-box">
+                    <p class="metric-number">8</p>
+                    <p class="text-secondary text-sm">Activity Diagrams</p>
+                </div>
+                <div class="metric-box">
+                    <p class="metric-number">6</p>
+                    <p class="text-secondary text-sm">Role Types</p>
+                </div>
+            </div>
+            
+            <div class="section-divider mb-16"></div>
+            
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right" data-aos-duration="800" data-aos-offset="50">
+                    <h3 class="heading-3 mb-6" style="color: var(--primary);">Project Type</h3>
+                    <p class="text-lg text-secondary leading-relaxed mb-8">
+                        Multi-role Electronic Retail Management System
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div style="background: var(--accent);" class="w-2 h-2 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <p class="font-semibold">Retail Operations</p>
+                                <p class="text-sm text-secondary">Centralized operations management</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div style="background: var(--accent);" class="w-2 h-2 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <p class="font-semibold">Inventory Management</p>
+                                <p class="text-sm text-secondary">Real-time stock tracking</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div style="background: var(--accent);" class="w-2 h-2 rounded-full mt-2 flex-shrink-0"></div>
+                            <div>
+                                <p class="font-semibold">Business Reporting</p>
+                                <p class="text-sm text-secondary">Comprehensive analytics and insights</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left" data-aos-duration="800" data-aos-offset="50">
+                    <img
+    src="assets/images/usecase.png"
+    alt="Project Overview Visual"
+    class="w-full h-[500px] object-contain rounded-xl"
+>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Business Problem -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">The Challenge</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Business Problem & Solution</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="card-premium">
+                    <h3 class="heading-4 mb-6" style="color: var(--primary);">The Problem</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        Business data was fragmented across multiple departments, creating operational inefficiencies:
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">•</span>
+                            <span class="text-secondary">Difficult inventory control and stock visibility</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">•</span>
+                            <span class="text-secondary">Challenges in order tracking and fulfillment</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">•</span>
+                            <span class="text-secondary">Limited business performance visibility</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">•</span>
+                            <span class="text-secondary">Barriers to data-driven decision making</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card-premium" style="background: linear-gradient(135deg, rgba(122, 30, 30, 0.05) 0%, rgba(215, 38, 56, 0.05) 100%);">
+                    <h3 class="heading-4 mb-6" style="color: var(--primary);">Our Solution</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        TechStore centralizes business data and standardizes operational processes:
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Centralized system architecture</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Standardized business processes</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Synchronized data across departments</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Data-driven business intelligence</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Business Goals -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Strategic Direction</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Business Goals</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Process Standardization</h4>
+                        <p class="text-sm text-secondary">Standardize business processes across the organization</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Data Synchronization</h4>
+                        <p class="text-sm text-secondary">Maintain data consistency and accuracy across systems</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-boxes"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Inventory Management</h4>
+                        <p class="text-sm text-secondary">Efficient stock and inventory operations</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Order Management</h4>
+                        <p class="text-sm text-secondary">Streamlined order processing and tracking</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Promotion Management</h4>
+                        <p class="text-sm text-secondary">Centralized promotion planning and execution</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Business Intelligence</h4>
+                        <p class="text-sm text-secondary">Data-driven insights for strategic decision making</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Stakeholders -->
+    <section id="stakeholders" class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Key Participants</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Stakeholders</h2>
+            
+            <div class="max-w-3xl" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="flex items-center gap-4">
+                            <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Customer</h4>
+                                <p class="text-sm text-secondary">End Customer</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Responsibilities:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Browse and purchase products</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Track orders in real-time</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Manage personal profile</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Goals:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Convenient shopping experience</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Quick product discovery</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="flex items-center gap-4">
+                            <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Store Employee</h4>
+                                <p class="text-sm text-secondary">Sales & Operations</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Responsibilities:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Process customer orders</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Provide customer support</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Execute promotions</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Goals:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Quick order processing</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Customer satisfaction</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="flex items-center gap-4">
+                            <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-store"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Store Manager</h4>
+                                <p class="text-sm text-secondary">Store Operations</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Responsibilities:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Product catalog management</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Order management</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Employee management</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Revenue monitoring</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Inventory distribution requests</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Goals:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Store profitability</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Efficient operations</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="flex items-center gap-4">
+                            <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-warehouse"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Warehouse Manager</h4>
+                                <p class="text-sm text-secondary">Inventory Management</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Responsibilities:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Inventory audits</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Stock import/export</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Inventory distribution</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Promotion creation</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Goals:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Optimal stock levels</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Efficient distribution</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="flex items-center gap-4">
+                            <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Director</h4>
+                                <p class="text-sm text-secondary">Executive Leadership</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Responsibilities:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Business reporting</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Promotion approval</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Distribution approval</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Goals:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Business growth</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Strategic decision making</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <div class="flex items-center gap-4">
+                            <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Technical Department</h4>
+                                <p class="text-sm text-secondary">IT Administration</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-text">
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Responsibilities:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Account management</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>Authorization and permissions</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>System administration</span></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-sm mb-2">Goals:</p>
+                                    <ul class="space-y-1 text-sm">
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>System security</span></li>
+                                        <li class="flex items-start gap-2"><span style="color: var(--accent);">▸</span><span>System reliability</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- System Scope -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Functional Coverage</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">System Scope</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="card-premium">
+                    <h4 class="font-semibold mb-4 flex items-center gap-2"><i class="fas fa-user" style="color: var(--accent);"></i> Customer Functions</h4>
+                    <ul class="space-y-2 text-sm text-secondary">
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Registration</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Login</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Product Search</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Product Comparison</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Cart Management</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Checkout</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Order Tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="card-premium">
+                    <h4 class="font-semibold mb-4 flex items-center gap-2"><i class="fas fa-user-tie" style="color: var(--accent);"></i> Store Functions</h4>
+                    <ul class="space-y-2 text-sm text-secondary">
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Order Processing</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Customer Support</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Product Management</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Category Management</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Employee Management</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Revenue Monitoring</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Distribution Requests</li>
+                    </ul>
+                </div>
+                
+                <div class="card-premium">
+                    <h4 class="font-semibold mb-4 flex items-center gap-2"><i class="fas fa-warehouse" style="color: var(--accent);"></i> Admin Functions</h4>
+                    <ul class="space-y-2 text-sm text-secondary">
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Inventory Audit</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Stock Import/Export</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Inventory Distribution</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Promotion Creation</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Business Reports</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> Approvals</li>
+                        <li class="flex items-start gap-2"><span style="color: var(--accent);">✓</span> System Admin</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- User Journeys -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">User Interactions</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">User Journeys</h2>
+            
+            <div class="space-y-12" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <!-- Customer Journey -->
+                <div class="flow-diagram hover-lift">
+                    <h4 class="heading-4 mb-8" style="color: var(--primary);">Customer Purchase Journey</h4>
+                    <div class="flex flex-wrap items-center justify-between gap-2 text-sm font-medium">
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Home</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Login</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Search Product</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Product Detail</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Add To Cart</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Checkout</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Payment</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--accent); color: white;">Order Tracking</span>
+                    </div>
+                </div>
+                
+                <!-- Store Employee Journey -->
+                <div class="flow-diagram hover-lift">
+                    <h4 class="heading-4 mb-8" style="color: var(--primary);">Store Employee Journey</h4>
+                    <div class="flex flex-wrap items-center justify-start gap-2 text-sm font-medium">
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Login</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Receive Order</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Process Order</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Update Status</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--accent); color: white;">Complete Order</span>
+                    </div>
+                </div>
+                
+                <!-- Store Manager Journey -->
+                <div class="flow-diagram hover-lift">
+                    <h4 class="heading-4 mb-8" style="color: var(--primary);">Store Manager Journey</h4>
+                    <div class="flex flex-wrap items-center justify-start gap-2 text-sm font-medium">
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Login</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Dashboard</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Product Mgmt</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Employee Mgmt</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Distribution Req</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--accent); color: white;">Revenue Monitor</span>
+                    </div>
+                </div>
+                
+                <!-- Warehouse Manager Journey -->
+                <div class="flow-diagram hover-lift">
+                    <h4 class="heading-4 mb-8" style="color: var(--primary);">Warehouse Manager Journey</h4>
+                    <div class="flex flex-wrap items-center justify-start gap-2 text-sm font-medium">
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Login</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Inventory Audit</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Import Stock</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Export Stock</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Create Promotion</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--accent); color: white;">Distribution Req</span>
+                    </div>
+                </div>
+                
+                <!-- Director Journey -->
+                <div class="flow-diagram hover-lift">
+                    <h4 class="heading-4 mb-8" style="color: var(--primary);">Director Journey</h4>
+                    <div class="flex flex-wrap items-center justify-start gap-2 text-sm font-medium">
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Login</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Dashboard</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">View Reports</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Review Requests</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Approve/Reject</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--accent); color: white;">Notify</span>
+                    </div>
+                </div>
+                
+                <!-- Technical Department Journey -->
+                <div class="flow-diagram hover-lift">
+                    <h4 class="heading-4 mb-8" style="color: var(--primary);">Technical Department Journey</h4>
+                    <div class="flex flex-wrap items-center justify-start gap-2 text-sm font-medium">
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Login</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Create Accounts</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Permissions</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Lock Accounts</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--primary); color: white;">Password Recovery</span>
+                        <i class="fas fa-arrow-right text-gray-400"></i>
+                        <span class="px-3 py-2 rounded-lg" style="background: var(--accent); color: white;">Monitor System</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Core Business Workflows -->
+    <section id="workflows" class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Critical Processes</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Core Business Workflows</h2>
+            
+            <div class="space-y-20" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <!-- Workflow 01: Promotion Approval -->
+                <div class="card-premium">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="accent-line"></div>
+                        <span class="text-sm font-bold text-secondary uppercase">Workflow 01</span>
+                    </div>
+                    <h3 class="heading-3 mb-8" style="color: var(--primary);">Promotion Approval Workflow</h3>
+                    <div class="grid md:grid-cols-2 gap-12 items-start">
+                        <div class="space-y-8">
+                            <div>
+                                <p class="font-semibold mb-3 text-sm uppercase tracking-widest">Process Flow</p>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">1</span>
+                                        <span>Warehouse Manager creates promotion</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">2</span>
+                                        <span>Submit request to Director</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">3</span>
+                                        <span>Director reviews & approves/rejects</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">4</span>
+                                        <span>Notify stakeholders & activate promotion</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-2">Business Value</p>
+                                <p class="text-sm text-secondary">Controls promotion execution, ensures brand consistency, and aligns promotions with business strategy.</p>
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/Sơ đồ hoạt động/Quản lý khuyến mãi.png"
+        alt="Promotion Workflow"
+        class="w-full h-[400px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+                
+                <!-- Workflow 02: Inventory Distribution Approval -->
+                <div class="card-premium">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="accent-line"></div>
+                        <span class="text-sm font-bold text-secondary uppercase">Workflow 02</span>
+                    </div>
+                    <h3 class="heading-3 mb-8" style="color: var(--primary);">Inventory Distribution Approval Workflow</h3>
+                    <div class="grid md:grid-cols-2 gap-12 items-start">
+                        <div class="space-y-8">
+                            <div>
+                                <p class="font-semibold mb-3 text-sm uppercase tracking-widest">Process Flow</p>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">1</span>
+                                        <span>Store Manager creates distribution request</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">2</span>
+                                        <span>Submit request to Director</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">3</span>
+                                        <span>Director reviews & approves/rejects</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">4</span>
+                                        <span>Send to Warehouse Manager for execution</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">5</span>
+                                        <span>Execute distribution & notify stakeholders</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-2">Business Value</p>
+                                <p class="text-sm text-secondary">Optimizes inventory distribution, prevents stockouts, and ensures efficient resource allocation across stores.</p>
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/Sơ đồ hoạt động/Điều phối hàng hóa.png"
+        alt="Distribution Workflow"
+        class="w-full h-[400px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+                
+                <!-- Workflow 03: Order Fulfillment -->
+                <div class="card-premium">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="accent-line"></div>
+                        <span class="text-sm font-bold text-secondary uppercase">Workflow 03</span>
+                    </div>
+                    <h3 class="heading-3 mb-8" style="color: var(--primary);">Order Fulfillment Workflow</h3>
+                    <div class="grid md:grid-cols-2 gap-12 items-start">
+                        <div class="space-y-8">
+                            <div>
+                                <p class="font-semibold mb-3 text-sm uppercase tracking-widest">Process Flow</p>
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">1</span>
+                                        <span>Customer places order</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">2</span>
+                                        <span>System records order</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">3</span>
+                                        <span>Store Employee & Manager process order</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">4</span>
+                                        <span>Warehouse checks stock & exports order</span>
+                                    </div>
+                                    <div class="flex items-center justify-center text-gray-400 mb-2">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <span class="font-semibold" style="color: var(--accent);">5</span>
+                                        <span>Order delivered & completed</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="font-semibold mb-2">Business Value</p>
+                                <p class="text-sm text-secondary">Streamlines order processing, ensures timely delivery, and improves customer satisfaction through transparency.</p>
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/Sơ đồ hoạt động/Xử lý đơn hàng.png"
+        alt="Order Workflow"
+        class="w-full h-[400px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Business Analysis Artifacts -->
+    <section id="artifacts" class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Diagrams & Documents</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Business Analysis Artifacts</h2>
+            
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="border-b border-gray-200 mb-8">
+                    <div class="flex gap-4 overflow-x-auto pb-4">
+                        <button class="tab-btn active" data-tab="fdd">
+                            <span class="font-semibold">FDD</span>
+                        </button>
+                        <button class="tab-btn" data-tab="usecase">
+                            <span class="font-semibold">Use Case</span>
+                        </button>
+                        <button class="tab-btn" data-tab="activity">
+                            <span class="font-semibold">Activity</span>
+                        </button>
+                        <button class="tab-btn" data-tab="dfd">
+                            <span class="font-semibold">DFD</span>
+                        </button>
+                        <button class="tab-btn" data-tab="sequence">
+                            <span class="font-semibold">Sequence</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="tab-content active" id="fdd-content">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="heading-4 mb-6" style="color: var(--primary);">Functional Decomposition Diagram</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <p class="font-semibold mb-2">Purpose</p>
+                                    <p class="text-secondary">Breaks down TechStore system into functional components and sub-components for detailed analysis.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Business Value</p>
+                                    <p class="text-secondary">Provides hierarchical view of system functionality, clarifies scope, and enables better resource planning.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Key Takeaway</p>
+                                    <p class="text-secondary">Understanding functional decomposition helps in identifying interdependencies and integration points.</p>
+                                </div>
+                    
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/sơ đồ phân cấp chức năng.png"
+        alt="FDD Diagram"
+        style="width:100%; height:500px; object-fit:contain;"
+    >
+</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="usecase-content">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="heading-4 mb-6" style="color: var(--primary);">Use Case Diagram</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <p class="font-semibold mb-2">Purpose</p>
+                                    <p class="text-secondary">Illustrates interactions between users and system, showing all major use cases and actor relationships.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Business Value</p>
+                                    <p class="text-secondary">Facilitates stakeholder communication, clarifies system boundaries, and validates requirements.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Key Takeaway</p>
+                                    <p class="text-secondary">Use cases are essential for understanding user interactions and defining system behavior.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/usecase.png"
+        alt="Use Case"
+        class="w-full h-[500px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="activity-content">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="heading-4 mb-6" style="color: var(--primary);">Activity Diagrams</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <p class="font-semibold mb-2">Purpose</p>
+                                    <p class="text-secondary">Visualize business processes and workflows showing activities, decision points, and object flows.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Business Value</p>
+                                    <p class="text-secondary">Enables process optimization, identifies bottlenecks, and supports process improvement initiatives.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Key Takeaway</p>
+                                    <p class="text-secondary">8 activity diagrams covering: Customer Registration, Payment Processing, Order Fulfillment, Inventory Distribution, Stock Management, Promotion Management, Account Management, and Business Reporting</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/Sơ đồ hoạt động/overall AD.png"
+        alt="Activity Diagram"
+        class="w-full h-[500px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="dfd-content">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="heading-4 mb-6" style="color: var(--primary);">Data Flow Diagrams</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <p class="font-semibold mb-2">Purpose</p>
+                                    <p class="text-secondary">Model data movement through processes, showing sources, destinations, stores, and flows.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Business Value</p>
+                                    <p class="text-secondary">Identifies data requirements, clarifies information architecture, and supports system design.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Key Takeaway</p>
+                                    <p class="text-secondary">2 comprehensive DFD levels showing all data flows and system-external entity interactions.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/DFD ngữ cảnh.png"
+        alt="DFD"
+        class="w-full h-[500px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="sequence-content">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="heading-4 mb-6" style="color: var(--primary);">Sequence Diagrams</h3>
+                            <div class="space-y-6">
+                                <div>
+                                    <p class="font-semibold mb-2">Purpose</p>
+                                    <p class="text-secondary">Show temporal sequence of interactions between objects/actors in specific scenarios.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Business Value</p>
+                                    <p class="text-secondary">Clarifies interaction protocols, validates behavior, and supports detailed system design.</p>
+                                </div>
+                                <div>
+                                    <p class="font-semibold mb-2">Key Takeaway</p>
+                                    <p class="text-secondary">20 sequence diagrams covering all major interactions across 5 different user roles.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="hover-lift bg-white p-4 rounded-xl soft-shadow">
+    <img
+        src="assets/images/Sequence Diagram/overall SD.png"
+        alt="Sequence Diagram"
+        class="w-full h-[500px] object-contain"
+    >
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Business Analysis Deliverables -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">BA Outputs</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Business Analysis Deliverables</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-object-group"></i>
+                        </div>
+                        <h4 class="font-semibold mb-3">Functional Decomposition Diagram</h4>
+                        <div class="text-sm text-secondary space-y-3">
+                            <p><span class="font-semibold">Objective:</span> Break down system functionality into hierarchical components</p>
+                            <p><span class="font-semibold">Business Value:</span> Clarifies system boundaries and functional scope</p>
+                            <p><span class="font-semibold">Key Insights:</span> Identified 1 FDD with 6 major actor roles and their responsibilities</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-diagram-project"></i>
+                        </div>
+                        <h4 class="font-semibold mb-3">Use Case Diagram</h4>
+                        <div class="text-sm text-secondary space-y-3">
+                            <p><span class="font-semibold">Objective:</span> Model system functionality from user perspective</p>
+                            <p><span class="font-semibold">Business Value:</span> Communicates system requirements to stakeholders</p>
+                            <p><span class="font-semibold">Key Insights:</span> Mapped interactions between 6 actors and key system functions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-arrows-alt"></i>
+                        </div>
+                        <h4 class="font-semibold mb-3">Activity Diagrams</h4>
+                        <div class="text-sm text-secondary space-y-3">
+                            <p><span class="font-semibold">Objective:</span> Visualize business processes and workflows</p>
+                            <p><span class="font-semibold">Business Value:</span> Identifies process bottlenecks and optimization opportunities</p>
+                            <p><span class="font-semibold">Key Insights:</span> Created 8 diagrams covering all core business processes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h4 class="font-semibold mb-3">Sequence Diagrams</h4>
+                        <div class="text-sm text-secondary space-y-3">
+                            <p><span class="font-semibold">Objective:</span> Model temporal sequences of system interactions</p>
+                            <p><span class="font-semibold">Business Value:</span> Clarifies component communication protocols</p>
+                            <p><span class="font-semibold">Key Insights:</span> Documented 20+ scenarios across all actor workflows</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h4 class="font-semibold mb-3">Data Flow Diagrams</h4>
+                        <div class="text-sm text-secondary space-y-3">
+                            <p><span class="font-semibold">Objective:</span> Model information movement through the system</p>
+                            <p><span class="font-semibold">Business Value:</span> Defines data architecture and integration points</p>
+                            <p><span class="font-semibold">Key Insights:</span> Created 2 DFD levels showing complete data ecosystem</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 class="font-semibold mb-3">Business Documentation</h4>
+                        <div class="text-sm text-secondary space-y-3">
+                            <p><span class="font-semibold">Objective:</span> Provide comprehensive reference documentation</p>
+                            <p><span class="font-semibold">Business Value:</span> Supports development, testing, and maintenance</p>
+                            <p><span class="font-semibold">Key Insights:</span> Comprehensive system analysis and modeling documentation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- System Thinking & Analysis -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Analytical Foundation</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">System Thinking & Analysis</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="card-premium">
+                    <h3 class="heading-4 mb-6" style="color: var(--primary);">Analytical Approach</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        This case study demonstrates a comprehensive approach to understanding how different stakeholders interact within a retail ecosystem and how business requirements translate into structured system models.
+                    </p>
+                    <p class="text-secondary text-sm">
+                        Through systematic analysis of stakeholder roles, business processes, and system interactions, we developed an integrated model that supports business operations, data management, and strategic decision-making.
+                    </p>
+                </div>
+                
+                <div class="card-premium" style="background: linear-gradient(135deg, rgba(122, 30, 30, 0.05) 0%, rgba(215, 38, 56, 0.05) 100%);">
+                    <h3 class="heading-4 mb-6" style="color: var(--primary);">Key Analysis Areas</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">→</span>
+                            <span class="text-secondary"><span class="font-semibold">Stakeholder Analysis:</span> Understanding roles, responsibilities, and interaction patterns</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">→</span>
+                            <span class="text-secondary"><span class="font-semibold">Process Analysis:</span> Mapping business workflows and identifying optimization opportunities</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">→</span>
+                            <span class="text-secondary"><span class="font-semibold">Functional Analysis:</span> Decomposing requirements into system functions and features</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">→</span>
+                            <span class="text-secondary"><span class="font-semibold">Data Flow Analysis:</span> Modeling information movement and system integration</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">→</span>
+                            <span class="text-secondary"><span class="font-semibold">Interaction Modeling:</span> Defining component communication protocols and sequences</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span style="color: var(--accent);" class="font-bold">→</span>
+                            <span class="text-secondary"><span class="font-semibold">Decision Support:</span> Enabling data-driven business decision-making</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Business Analysis Approach -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Methodology</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Business Analysis Approach</h2>
+            
+            <div class="max-w-4xl" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="relative">
+                    <div class="space-y-0">
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>1</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Stakeholder Identification</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Identify all stakeholders and their roles in the system</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Stakeholder register with roles, responsibilities, and interests</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>2</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Business Problem Analysis</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Understand current problems and desired improvements</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Problem statement and business objectives</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>3</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Requirements Gathering</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Collect detailed functional and non-functional requirements</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Comprehensive requirements specification</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>4</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Functional Decomposition</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Break down requirements into functional components</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Functional hierarchy and system scope definition</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>5</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Process Modeling</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Model business processes and workflows</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Activity diagrams and process flows</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>6</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">System Modeling</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Create comprehensive system models and interaction diagrams</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Use case diagrams, sequence diagrams, and data flow diagrams</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>7</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Documentation</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Create comprehensive business and technical documentation</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Complete system documentation package</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mb-4"><span>8</span></div>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-semibold mb-2">Review & Validation</h4>
+                                <p class="text-sm text-secondary mb-2"><span class="font-semibold">Purpose:</span> Validate analysis with stakeholders and finalize deliverables</p>
+                                <p class="text-sm text-secondary"><span class="font-semibold">Outcome:</span> Approved requirements and system models ready for development</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Project Journey -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Development Timeline</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Project Journey</h2>
+            
+            <div class="max-w-2xl" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="relative">
+                    <div class="space-y-0">
+                        <div class="flex gap-8 pb-8 border-b border-gray-200 last:border-b-0">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-4 h-4 rounded-full border-4" style="border-color: var(--bg);"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Requirement Analysis</h4>
+                                <p class="text-secondary text-sm">Gathering and analyzing business requirements from all stakeholders</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200 last:border-b-0">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-4 h-4 rounded-full border-4" style="border-color: var(--bg);"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Functional Analysis</h4>
+                                <p class="text-secondary text-sm">Breaking down system into functional components</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200 last:border-b-0">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-4 h-4 rounded-full border-4" style="border-color: var(--bg);"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">System Modeling</h4>
+                                <p class="text-secondary text-sm">Creating UML diagrams and data flow models</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200 last:border-b-0">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-4 h-4 rounded-full border-4" style="border-color: var(--bg);"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Documentation</h4>
+                                <p class="text-secondary text-sm">Preparing comprehensive system documentation</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8 border-b border-gray-200 last:border-b-0">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-4 h-4 rounded-full border-4" style="border-color: var(--bg);"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Review</h4>
+                                <p class="text-secondary text-sm">Stakeholder review and feedback incorporation</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-8 pb-8">
+                            <div class="flex flex-col items-center">
+                                <div style="background: var(--accent);" class="w-4 h-4 rounded-full border-4" style="border-color: var(--bg);"></div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Final Report</h4>
+                                <p class="text-secondary text-sm">Completion of comprehensive business analysis report</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- My Contributions -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Role & Impact</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">My Contributions</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="card-premium">
+                    <h3 class="heading-4 mb-6" style="color: var(--primary);">Role</h3>
+                    <p class="text-secondary leading-relaxed mb-6">
+                        Business Analysis, System Design & UI/UX Design
+                    </p>
+                    <p class="text-secondary text-sm">
+                        Responsible for translating business requirements into system models, process documentation, and design specifications to guide development teams and stakeholders.
+                    </p>
+                </div>
+                
+                <div class="card-premium" style="background: linear-gradient(135deg, rgba(122, 30, 30, 0.05) 0%, rgba(215, 38, 56, 0.05) 100%);">
+                    <h3 class="heading-4 mb-6" style="color: var(--primary);">Responsibilities</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Requirement Analysis</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Stakeholder Analysis</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Functional Decomposition Diagram</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Use Case & Activity Diagrams</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Sequence & Data Flow Diagrams</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">Business Workflow Modeling</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">User Journey Mapping & Documentation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check" style="color: var(--accent);"></i>
+                            <span class="text-secondary">UI/UX Design</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Lessons Learned -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Insights</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Lessons Learned</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">1</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Requirements Translation</h4>
+                        <p class="text-secondary text-sm">Converting business requirements into system models requires deep understanding of both business context and technical constraints through active stakeholder engagement.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">2</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Stakeholder Analysis</h4>
+                        <p class="text-secondary text-sm">Understanding stakeholder relationships within complex organizations is essential for requirement prioritization and solution design alignment.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">3</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Process Modeling</h4>
+                        <p class="text-secondary text-sm">Activity diagrams effectively visualize complex business workflows and reveal optimization opportunities, redundancies, and process bottlenecks.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">4</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">System Interactions</h4>
+                        <p class="text-secondary text-sm">Sequence diagrams clarify temporal relationships between system components and identify communication protocols, dependencies, and data flows.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">5</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Information Architecture</h4>
+                        <p class="text-secondary text-sm">Data flow diagrams provide comprehensive visibility into system information movement and reveal critical integration points and data consistency challenges.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">6</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Documentation Value</h4>
+                        <p class="text-secondary text-sm">Comprehensive business documentation serves as a knowledge base for current and future teams, reducing rework and accelerating development cycles.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">7</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Team Collaboration</h4>
+                        <p class="text-secondary text-sm">Business analysts must bridge the communication gap between business stakeholders and technical teams, serving as translators and facilitators.</p>
+                    </div>
+                </div>
+                
+                <div class="story-card hover-lift">
+                    <div class="story-card-content">
+                        <div style="background: var(--primary); color: white;" class="w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+                            <span class="font-bold">8</span>
+                        </div>
+                        <h4 class="font-semibold mb-2">Analytical Thinking</h4>
+                        <p class="text-secondary text-sm">Systematic analysis of business problems using structured methodologies leads to better solution design and reduced implementation risks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Future Development -->
+    <section class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Next Steps</p>
+            </div>
+            <h2 class="heading-2 mb-12" style="color: var(--primary);">Future Development</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="card-premium hover-lift">
+                    <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4 class="font-semibold mb-3">Business Analysis</h4>
+                    <p class="text-sm text-secondary">Deepening expertise in requirements gathering, stakeholder analysis, and business process modeling.</p>
+                </div>
+                
+                <div class="card-premium hover-lift">
+                    <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4 class="font-semibold mb-3">Product Thinking</h4>
+                    <p class="text-sm text-secondary">Developing product management skills and strategic thinking for feature prioritization.</p>
+                </div>
+                
+                <div class="card-premium hover-lift">
+                    <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4 class="font-semibold mb-3">Documentation</h4>
+                    <p class="text-sm text-secondary">Mastering BRD, UAT, and test case documentation for comprehensive system validation.</p>
+                </div>
+                
+                <div class="card-premium hover-lift">
+                    <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h4 class="font-semibold mb-3">Project Management</h4>
+                    <p class="text-sm text-secondary">Gaining proficiency with Jira and agile methodologies for efficient project tracking.</p>
+                </div>
+                
+                <div class="card-premium hover-lift">
+                    <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4 class="font-semibold mb-3">Stakeholder Management</h4>
+                    <p class="text-sm text-secondary">Developing strong communication and negotiation skills for cross-functional collaboration.</p>
+                </div>
+                
+                <div class="card-premium hover-lift">
+                    <div style="background: var(--accent); color: white;" class="w-12 h-12 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h4 class="font-semibold mb-3">Career Growth</h4>
+                    <p class="text-sm text-secondary">Transitioning to Product Management roles with comprehensive business and technical foundation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- About Me -->
+    <section id="about" class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6 justify-center">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Personal</p>
+                <div class="accent-line"></div>
+            </div>
+            <h2 class="heading-2 mb-12 text-center" style="color: var(--primary);">About Me</h2>
+            
+            <div class="card-premium text-center" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <div class="mb-8">
+                    <img
+    src="assets/images/avatar.png"
+    alt="Profile"
+    class="w-32 h-32 rounded-2xl mx-auto mb-6 object-cover"
+>
+                </div>
+                
+                <h3 class="heading-3 mb-4" style="color: var(--primary);">Business Analyst</h3>
+                <p class="text-secondary mb-6">Systems Analysis & Business Modeling</p>
+                <p class="text-secondary mb-8 leading-relaxed">
+                    I am an Information Technology student at Ho Chi Minh City University of Education with a strong interest in Business Analysis, System Analysis, and Product Development. I enjoy analyzing business requirements, modeling business processes, and creating documentation that supports software development initiatives. Through academic projects, I have gained hands-on experience in process modeling, system analysis, stakeholder analysis, and business documentation. My long-term goal is to grow into a Business Analyst and contribute to the development of user-centered and business-driven digital products.
+                </p>
+                
+                <div class="flex flex-wrap gap-2 justify-center mb-8">
+                    <span class="skill-tag">Business Analysis</span>
+                    <span class="skill-tag">System Design</span>
+                    <span class="skill-tag">Product Thinking</span>
+                    <span class="skill-tag">UML Modeling</span>
+                    <span class="skill-tag">Documentation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20" data-aos="fade-up" data-aos-duration="800">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="flex items-center gap-4 mb-6 justify-center">
+                <div class="accent-line"></div>
+                <p class="text-sm font-semibold text-secondary uppercase tracking-widest">Get In Touch</p>
+                <div class="accent-line"></div>
+            </div>
+            <h2 class="heading-2 mb-12 text-center" style="color: var(--primary);">Contact</h2>
+            
+            <div class="flex justify-center" data-aos="fade-up" data-aos-duration="800" data-aos-offset="50">
+                <a
+    href="mailto:buithikieungan2005@gmail.com"
+    class="card-premium text-center hover-lift max-w-md w-full block"
+>
+    <div style="background: var(--primary); color: white;"
+         class="w-16 h-16 rounded-lg flex items-center justify-center mb-4 mx-auto">
+        <i class="fas fa-envelope text-xl"></i>
+    </div>
+
+    <h4 class="font-semibold mb-2">Email</h4>
+
+    <p class="text-secondary">
+        buithikieungan2005@gmail.com
+    </p>
+</a>
+                
+                
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-secondary text-sm">
+                © 2026 Bui Thi Kieu Ngan. All rights reserved.
+            </p>
+            <p class="text-secondary text-xs mt-2">
+                Developed as a Business Analysis Case Study Portfolio.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalImage" class="placeholder-image" style="height: 600px; margin-top: 2rem;">
+                <span id="modalLabel">Diagram</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            easing: 'ease-out-cubic',
+            once: true
+        });
+
+        // Smooth scroll navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    updateActiveNav();
+                }
+            });
+        });
+
+        // Active navigation highlight
+        function updateActiveNav() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('nav-active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const item = this.parentElement;
+                const content = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+                
+                // Close all other accordions
+                document.querySelectorAll('.accordion-header').forEach(h => {
+                    if (h !== this) {
+                        h.classList.remove('active');
+                        h.nextElementSibling.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current accordion
+                this.classList.toggle('active');
+                content.classList.toggle('active');
+            });
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // Remove active from all tabs and contents
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active to clicked tab and corresponding content
+                this.classList.add('active');
+                document.getElementById(tabName + '-content').classList.add('active');
+            });
+        });
+
+        // Modal functionality
+        function openModal(type) {
+            const modal = document.getElementById('imageModal');
+            const label = document.getElementById('modalLabel');
+            
+            const labels = {
+                'fdd': 'Functional Decomposition Diagram',
+                'usecase': 'Use Case Diagram',
+                'activity': 'Activity Diagrams',
+                'dfd': 'Data Flow Diagrams',
+                'sequence': 'Sequence Diagrams'
+            };
+            
+            label.textContent = labels[type] || 'Diagram';
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal on ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on click outside
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
